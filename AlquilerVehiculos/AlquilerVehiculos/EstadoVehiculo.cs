@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AlquilerVehiculos
 {
+    //Estados de los vehiculos 
     public enum EstadoVehiculo
     {
         Disponible,
