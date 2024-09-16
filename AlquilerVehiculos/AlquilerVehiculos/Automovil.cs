@@ -11,5 +11,10 @@ namespace AlquilerVehiculos
         public Automovil(string marca, string modelo, int año, decimal precio)
             : base(marca, modelo, año, precio)
         { }
+
+        public override void MostrarDetalles()
+        {
+            Console.WriteLine($"Automóvil - Marca: {Marca}, Modelo: {Modelo}, Año: {Año}, Precio: {Precio:C}, Estado: {Estado}");
+        }
     }
 }
