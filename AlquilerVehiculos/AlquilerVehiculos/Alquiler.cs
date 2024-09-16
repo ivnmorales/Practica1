@@ -181,6 +181,77 @@ namespace AlquilerVehiculos
                 Console.WriteLine("Vehículo no encontrado.");
             }
         }
+        private static void ActualizarVehiculo()
+        {
+            Console.Write("Ingrese la marca del vehículo a actualizar: ");
+            var marca = Console.ReadLine();
+            Console.Write("Ingrese el modelo del vehículo a actualizar: ");
+            var modelo = Console.ReadLine();
+
+            var vehiculo = vehiculos.FirstOrDefault(v => v.Marca.Equals(marca, StringComparison.OrdinalIgnoreCase) &&
+                                                          v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase));
+
+            if (vehiculo != null)
+            {
+                Console.Write("Ingrese el nuevo precio de alquiler: ");
+                vehiculo.Precio = decimal.Parse(Console.ReadLine());
+
+                Console.WriteLine("Información del vehículo actualizada con éxito.");
+            }
+            else
+            {
+                Console.WriteLine("Vehículo no encontrado.");
+            }
+        }
+
+        private static void VerHistorialReservas()
+        {
+            foreach (var vehiculo in vehiculos)
+            {
+                Console.WriteLine($"Vehículo: {vehiculo.Marca} {vehiculo.Modelo}");
+                foreach (var reserva in vehiculo.HistorialReservas)
+                {
+                    Console.WriteLine($" - {reserva}");
+                }
+            }
+        }
+
+        private static void MostrarVehiculos()
+        {
+            if (vehiculos.Count == 0)
+            {
+                Console.WriteLine("No hay vehículos registrados.");
+                return;
+            }
+
+            foreach (var vehiculo in vehiculos)
+            {
+                vehiculo.MostrarDetalles();
+            }
+        }
+
+        private static void ReservarVehiculo()
+        {
+            Console.Write("Ingrese la marca del vehículo a reservar: ");
+            var marca = Console.ReadLine();
+            Console.Write("Ingrese el modelo del vehículo a reservar: ");
+            var modelo = Console.ReadLine();
+
+            var vehiculo = vehiculos.FirstOrDefault(v => v.Marca.Equals(marca, StringComparison.OrdinalIgnoreCase) &&
+                                                          v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase) &&
+                                                          v.Estado == EstadoVehiculo.Disponible);
+
+            if (vehiculo != null)
+            {
+                Console.Write("Ingrese su nombre: ");
+                var cliente = Console.ReadLine();
+                vehiculo.Reservar(cliente);
+            }
+            else
+            {
+                Console.WriteLine("Vehículo no disponible para reserva.");
+            }
+        }
 
     }
 }
