@@ -8,11 +8,14 @@ namespace AlquilerVehiculos
 {
     public class Alquiler
     {
+        // Lista estatica para almacenar los vehiculos
         private static List<Vehiculo> vehiculos = new List<Vehiculo>();
+        //bandera que controla si el usuario es administrador
         private static bool esAdministrador = false;
 
         public static void Main(string[] args)
         {
+            //bucle para seleccionar rol
             while (true)
             {
                 Console.WriteLine("Seleccione su rol:");
@@ -25,13 +28,13 @@ namespace AlquilerVehiculos
                 {
                     esAdministrador = true;
                     Console.WriteLine("\nInicio de sesión como Administrador.\n");
-                    AdministradorMenu();
+                    AdministradorMenu();//llama al menu admin
                 }
                 else if (rol == "2")
                 {
                     esAdministrador = false;
                     Console.WriteLine("\nInicio de sesión como Cliente.\n");
-                    ClienteMenu();
+                    ClienteMenu(); //llama al menu cliente
                 }
                 else
                 {
@@ -168,12 +171,15 @@ namespace AlquilerVehiculos
             Console.Write("Ingrese el modelo del vehículo a eliminar: ");
             var modelo = Console.ReadLine();
 
+            //Busca el primer vehiculo en la lista que coincida con la marca y modelo
+            //si no encuentra devuelve NULL(ignora mayusculas y minisculas)
+
             var vehiculo = vehiculos.FirstOrDefault(v => v.Marca.Equals(marca, StringComparison.OrdinalIgnoreCase) &&
                                                           v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase));
 
             if (vehiculo != null)
             {
-                vehiculos.Remove(vehiculo);
+                vehiculos.Remove(vehiculo); //elimina el vehiculo encontrado
                 Console.WriteLine("Vehículo eliminado con éxito.");
             }
             else
@@ -187,6 +193,9 @@ namespace AlquilerVehiculos
             var marca = Console.ReadLine();
             Console.Write("Ingrese el modelo del vehículo a actualizar: ");
             var modelo = Console.ReadLine();
+
+            //Busca el primer vehiculo en la lista que coincida con la marca y modelo
+            //si no encuentra devuelve NULL(ignora mayusculas o minusculas)
 
             var vehiculo = vehiculos.FirstOrDefault(v => v.Marca.Equals(marca, StringComparison.OrdinalIgnoreCase) &&
                                                           v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase));
@@ -236,6 +245,9 @@ namespace AlquilerVehiculos
             var marca = Console.ReadLine();
             Console.Write("Ingrese el modelo del vehículo a reservar: ");
             var modelo = Console.ReadLine();
+
+            //Busca el primer vehiculo en la lista que coincida con la marca y modelo y que este 'disponible'
+            //si no encuentra devuelve NULL(ignora mayusculas o minusculas)
 
             var vehiculo = vehiculos.FirstOrDefault(v => v.Marca.Equals(marca, StringComparison.OrdinalIgnoreCase) &&
                                                           v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase) &&
