@@ -8,5 +8,8 @@ namespace AlquilerVehiculos
 {
     public enum EstadoVehiculo
     {
+        Disponible,
+        Reservado,
+        Alquilado
     }
 }
