@@ -18,6 +18,8 @@ namespace AlquilerVehiculos
         void Alquilar(string cliente);
         void Reservar(string cliente);
         void Devolver();
+        void MostrarDetalles();
+
 
     }
 }

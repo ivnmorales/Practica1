@@ -43,5 +43,7 @@ namespace AlquilerVehiculos
             Estado = EstadoVehiculo.Disponible;
             Console.WriteLine("Vehículo devuelto y está disponible.");
         }
+
+        public abstract void MostrarDetalles();
     }
 }
