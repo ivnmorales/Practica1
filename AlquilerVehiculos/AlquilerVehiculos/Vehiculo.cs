@@ -23,5 +23,25 @@ namespace AlquilerVehiculos
             Precio = precio;
             Estado = EstadoVehiculo.Disponible;
         }
+
+        public void Alquilar(string cliente)
+        {
+            Estado = EstadoVehiculo.Alquilado;
+            HistorialReservas.Add($"Alquilado a {cliente}.");
+            Console.WriteLine($"Vehículo alquilado a {cliente}.");
+        }
+
+        public void Reservar(string cliente)
+        {
+            Estado = EstadoVehiculo.Reservado;
+            HistorialReservas.Add($"Reservado para {cliente}.");
+            Console.WriteLine($"Vehículo reservado para {cliente}.");
+        }
+
+        public void Devolver()
+        {
+            Estado = EstadoVehiculo.Disponible;
+            Console.WriteLine("Vehículo devuelto y está disponible.");
+        }
     }
 }
