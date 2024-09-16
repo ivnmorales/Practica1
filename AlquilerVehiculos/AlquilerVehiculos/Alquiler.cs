@@ -85,5 +85,102 @@ namespace AlquilerVehiculos
                 }
             }
         }
+
+        private static void ClienteMenu()
+        {
+            while (!esAdministrador)
+            {
+                Console.WriteLine("--- Menú de Cliente ---");
+                Console.WriteLine("1. Reservar vehículo");
+                Console.WriteLine("2. Devolver vehículo");
+                Console.WriteLine("3. Mostrar vehículos");
+                Console.WriteLine("4. Cambiar a Administrador");
+                Console.WriteLine("5. Salir");
+                Console.Write("Seleccione una opción: ");
+                var opcion = Console.ReadLine();
+
+                switch (opcion)
+                {
+                    case "1":
+                        ReservarVehiculo();
+                        break;
+                    case "2":
+                        DevolverVehiculo();
+                        break;
+                    case "3":
+                        MostrarVehiculos();
+                        break;
+                    case "4":
+                        esAdministrador = true;
+                        Console.WriteLine("\nCambiando a modo Administrador.\n");
+                        return; // Salir del menú de cliente
+                    case "5":
+                        Console.WriteLine("Saliendo del programa.");
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida.");
+                        break;
+                }
+            }
+        }
+
+        private static void RegistrarVehiculo()
+        {
+            Console.Write("Ingrese la marca del vehículo: ");
+            var marca = Console.ReadLine();
+            Console.Write("Ingrese el modelo del vehículo: ");
+            var modelo = Console.ReadLine();
+            Console.Write("Ingrese el año del vehículo: ");
+            var año = int.Parse(Console.ReadLine());
+            Console.Write("Ingrese el precio de alquiler del vehículo: ");
+            var precio = decimal.Parse(Console.ReadLine());
+
+            Console.WriteLine("¿Qué tipo de vehículo desea registrar?");
+            Console.WriteLine("1. Automóvil");
+            Console.WriteLine("2. Motocicleta");
+            Console.WriteLine("3. Camión");
+            Console.Write("Ingrese una opción: ");
+            var tipo = Console.ReadLine();
+
+            Vehiculo vehiculo = tipo switch
+            {
+                "1" => new Automovil(marca, modelo, año, precio),
+                "2" => new Motocicleta(marca, modelo, año, precio),
+                "3" => new Camion(marca, modelo, año, precio),
+                _ => null
+            };
+
+            if (vehiculo != null)
+            {
+                vehiculos.Add(vehiculo);
+                Console.WriteLine("Vehículo registrado con éxito.");
+            }
+            else
+            {
+                Console.WriteLine("Tipo de vehículo no válido. No se registró el vehículo.");
+            }
+        }
+        private static void EliminarVehiculo()
+        {
+            Console.Write("Ingrese la marca del vehículo a eliminar: ");
+            var marca = Console.ReadLine();
+            Console.Write("Ingrese el modelo del vehículo a eliminar: ");
+            var modelo = Console.ReadLine();
+
+            var vehiculo = vehiculos.FirstOrDefault(v => v.Marca.Equals(marca, StringComparison.OrdinalIgnoreCase) &&
+                                                          v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase));
+
+            if (vehiculo != null)
+            {
+                vehiculos.Remove(vehiculo);
+                Console.WriteLine("Vehículo eliminado con éxito.");
+            }
+            else
+            {
+                Console.WriteLine("Vehículo no encontrado.");
+            }
+        }
+
     }
 }
