@@ -37,9 +37,9 @@ namespace AlquilerVehiculos
 
         public void Reservar(string cliente)
         {
-            Estado = EstadoVehiculo.Reservado; //cambia el estado a reservado
+            Estado = EstadoVehiculo.Alquilado; // Cambia el estado a 'Alquilado'
             HistorialReservas.Add($"Reservado para {cliente}.");
-            Console.WriteLine($"Vehículo reservado para {cliente}.");
+            Console.WriteLine($"Vehículo reservado para {cliente}.");
         }
 
         public void Devolver()
@@ -50,5 +50,7 @@ namespace AlquilerVehiculos
 
         //metodo abstracto para que las clases derivadas puedan mostrar los detalles del vehiculo
         public abstract void MostrarDetalles();
+
+        
     }
 }

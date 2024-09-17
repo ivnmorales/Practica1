@@ -272,19 +272,28 @@ namespace AlquilerVehiculos
             Console.Write("Ingrese el modelo del vehículo a devolver: ");
             var modelo = Console.ReadLine();
 
-            var vehiculo = vehiculos.FirstOrDefault(v => v.Marca.Equals(marca, StringComparison.OrdinalIgnoreCase) &&
-                                                          v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase) &&
-                                                          v.Estado == EstadoVehiculo.Alquilado);
+            // Búsqueda del vehículo por marca y modelo (ignorando mayúsculas y minúsculas)
+            var vehiculo = vehiculos.FirstOrDefault(v =>
+                v.Marca.Equals(marca, StringComparison.OrdinalIgnoreCase) &&
+                v.Modelo.Equals(modelo, StringComparison.OrdinalIgnoreCase));
 
             if (vehiculo != null)
             {
-                vehiculo.Devolver();
+                // Verificar si el estado es 'Alquilado'
+                if (vehiculo.Estado == EstadoVehiculo.Alquilado)
+                {
+                    vehiculo.Devolver();
+                    Console.WriteLine("Vehículo devuelto con éxito.");
+                }
+                else
+                {
+                    Console.WriteLine("El vehículo no está actualmente alquilado.");
+                }
             }
             else
             {
-                Console.WriteLine("Vehículo no encontrado o no está actualmente alquilado.");
+                Console.WriteLine("Vehículo no encontrado. Verifique los datos ingresados.");
             }
         }
-
     }
 }
